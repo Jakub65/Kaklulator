@@ -1,0 +1,24 @@
+ZADANIA DO WYKONANIA:
+1. Czy Twoj kalkulator potrafi wykonywac operacje jedna po drugiej, tzn. 2+2=+5=-3=
+??
+2. Popraw kalkulator tak, aby "pusty" wyswietlacz zawieral zero. 
+(wiodące zera nie powinny byc pokazywane dla liczb<>0)
+3. Popraw kalkulator, aby mozna bylo wpisac tylko cyfry i przecinek 
+PODPOWIEDZI:
+- bieżącą wartość separatora dziesietnego znajdziesz w FormatSettings.DecimalSeparator
+- zdarzenie KeyPress pozwala przechwycic wpisywanie tekstu bezposrednio do Edita
+Przypisanie wartosci Key zera powoduje zignorowanie nacisniecia klawisza:
+
+procedure TForm1.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+ if not CharInSet(Key, ['0'..'9',FormatSettings.DecimalSeparator,#8]) then
+  Key:=#0;
+end;
+
+Ten przyklad pozwala wpisywac w Edit1 wylacznie cyfry, separator dziesietny 
+i uzywac klawisza BACKSPACE (kod 8)
+W nowszych wersjach Delphi powyższy kod z użyciem operatora "in" daje warning.
+
+*4. Popraw kalkulator, aby można było wpisac tylko jeden przecinek 
+PODPOWIEDŹ:
+- funkcja Pos(szukane, gdzie) zwraca pozycje ciagu "szukane" w ciagu "gdzie".
